@@ -29,7 +29,7 @@
 					"name": "DerivedColumn1"
 				}
 			],
-			"script": "source(output(\n\t\temp_id as string,\n\t\temp_name as string,\n\t\temp_surname as string,\n\t\temp_designation_id as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\twildcardPaths:['*.csv']) ~> source1\nsource1 filter(emp_id=='1') ~> Filter1\nFilter1 derive(column1 = emp_nameemp_name||emp_surname) ~> DerivedColumn1\nDerivedColumn1 sink(input(\n\t\temp_id as string,\n\t\temp_name as string,\n\t\temp_surname as string,\n\t\temp_designation_id as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> sink1"
+			"script": "source(output(\n\t\temp_id as string,\n\t\temp_name as string,\n\t\temp_surname as string,\n\t\temp_designation_id as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\twildcardPaths:['*.csv']) ~> source1\nsource1 filter(emp_id=='1') ~> Filter1\nFilter1 derive(column1 = emp_name==emp_surname) ~> DerivedColumn1\nDerivedColumn1 sink(input(\n\t\temp_id as string,\n\t\temp_name as string,\n\t\temp_surname as string,\n\t\temp_designation_id as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> sink1"
 		}
 	}
 }
